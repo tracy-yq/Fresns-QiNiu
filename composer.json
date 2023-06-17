@@ -1,0 +1,20 @@
+{
+    "name": "fresns/qiniu",
+    "description": "QiNiu plugin made by fresns",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tracy",
+            "homepage": "https://github.com/tracy-yq",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Plugins\\QiNiu\\": "app"
+        }
+    },
+    "require": {
+        "overtrue/laravel-filesystem-qiniu": "^2.2"
+    }
+}
