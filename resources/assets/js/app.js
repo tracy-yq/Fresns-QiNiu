@@ -291,11 +291,10 @@ function uploadFile(file) {
         // 不是音视频的时候，直接可以上传
         // 音视频的时长获取到之后，也可以进行上传，此时需要清理定时器
         if ((uploadType == 'video' || uploadType == 'audio') && setting_uploadMaxTime) {
-            console.log(`${uploadTypeStr} duration: ${duration}s, uploadMaxTime: ${setting_uploadMaxTime}`);
+            console.log(`${uploadTypeStr} duration: ${duration && duration + "s" || duration}, uploadMaxTime: ${setting_uploadMaxTime}`);
 
             if (!duration) {
                 console.log(`获取${uploadTypeStr}时长失败`);
-                return;
             }
 
             if (duration > setting_uploadMaxTime) {
@@ -388,7 +387,39 @@ function uploadFile(file) {
                             data: res.data,
                         }
 
-                        parent.postMessage(JSON.stringify(fresnsCallbackMessage), '*');
+                        const messageString = JSON.stringify(fresnsCallbackMessage);
+                        const userAgent = navigator.userAgent.toLowerCase();
+
+                        switch (true) {
+                            case (window.Android !== undefined):
+                                // Android (addJavascriptInterface)
+                                window.Android.receiveMessage(messageString);
+                                break;
+
+                            case (window.webkit && window.webkit.messageHandlers.iOSHandler !== undefined):
+                                // iOS (WKScriptMessageHandler)
+                                window.webkit.messageHandlers.iOSHandler.postMessage(messageString);
+                                break;
+
+                            case (window.FresnsJavascriptChannel !== undefined):
+                                // Flutter
+                                window.FresnsJavascriptChannel.postMessage(messageString);
+                                break;
+
+                            case (window.ReactNativeWebView !== undefined):
+                                // React Native WebView
+                                window.ReactNativeWebView.postMessage(messageString);
+                                break;
+
+                            case (userAgent.indexOf('miniprogram') > -1 && wx && wx.miniProgram):
+                                // WeChat Mini Program
+                                wx.miniProgram.postMessage({ data: messageString });
+                                break;
+
+                            // Web
+                            default:
+                                parent.postMessage(messageString, '*');
+                        }
 
                         console.log('发送给父级的信息', fresnsCallbackMessage);
                     },

@@ -25,6 +25,7 @@
         <div class="fresns-tips"></div>
 
         <script src="https://cdn.staticfile.org/qiniu-js/3.4.1/qiniu.min.js"></script>
+        <script src="//res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
         <script src="{{ @asset('/static/js/bootstrap.bundle.min.js') }}"></script>
         <script src="{{ @asset('/static/js/jquery.min.js') }}"></script>
         <script src="{{ @asset('/static/js/select2.min.js') }}"></script>
