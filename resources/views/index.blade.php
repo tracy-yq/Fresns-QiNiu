@@ -6,7 +6,7 @@
             {{ $fileCountTip }}
         </div>
     @else
-        <form class="my-2 mx-2" id="QiNiuForm" method="post" action="http://upload.qiniup.com/" enctype="multipart/form-data">
+        <form class="mt-4 mb-2 mx-2" id="QiNiuForm" method="post" action="http://upload.qiniup.com/" enctype="multipart/form-data">
             <input type="hidden" name="type" value="{{ $fileType }}">
             <input type="hidden" name="platformId" value="{{ $checkHeaders['platformId'] }}">
             <input type="hidden" name="aid" value="{{ $checkHeaders['aid'] }}">

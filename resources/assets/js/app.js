@@ -204,6 +204,12 @@ function uploadFile(file) {
     var setting_uploadMaxSize = $('#uploadMaxSize').data('value');
     var setting_uploadMaxTime = $('#uploadMaxTime').data('value');
     var setting_uploadFileMax = $('#uploadFileMax').data('value');
+    if (setting_uploadMaxSize) {
+        setting_uploadMaxSize = setting_uploadMaxSize + 1
+    }
+    if (setting_uploadMaxTime) {
+        setting_uploadMaxTime = setting_uploadMaxTime + 1
+    }
 
     var extension = getFileExtension(file.name);
 
@@ -381,8 +387,8 @@ function uploadFile(file) {
                             action: {
                                 postMessageKey: searchParams.get('postMessageKey'), // 路径中 postMessageKey 变量值
                                 windowClose: true, // 是否关闭窗口或弹出层(modal)
-                                reloadData: true, // 是否重载数据
                                 redirectUrl: '', // 是否重定向新页面
+                                dataHandler: 'add' // 是否处理数据: add, remove, reload
                             },
                             data: res.data,
                         }
@@ -411,9 +417,10 @@ function uploadFile(file) {
                                 window.ReactNativeWebView.postMessage(messageString);
                                 break;
 
-                            case (userAgent.indexOf('miniprogram') > -1 && wx && wx.miniProgram):
+                            case (userAgent.indexOf('miniprogram') > -1):
                                 // WeChat Mini Program
                                 wx.miniProgram.postMessage({ data: messageString });
+                                wx.miniProgram.navigateBack();
                                 break;
 
                             // Web
