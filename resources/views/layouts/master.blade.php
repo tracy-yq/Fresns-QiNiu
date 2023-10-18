@@ -6,6 +6,7 @@
         <meta name="author" content="Fresns" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="_token" content="{{ csrf_token() }}">
+        <meta http-equiv="Cache-Control"content="no-cache"/>
         <title>Plugin QiNiu</title>
         <link rel="stylesheet" href="{{ @asset('/static/css/bootstrap.min.css') }}">
         <link rel="stylesheet" href="{{ @asset('/static/css/bootstrap-icons.min.css') }}">
@@ -29,8 +30,8 @@
         <script src="{{ @asset('/static/js/bootstrap.bundle.min.js') }}"></script>
         <script src="{{ @asset('/static/js/jquery.min.js') }}"></script>
         <script src="{{ @asset('/static/js/select2.min.js') }}"></script>
-        <script src="{{ @asset('/assets/plugins/QiNiu/js/lodash.min.js') }}"></script>
-        <script src="{{ @asset('/assets/plugins/QiNiu/js/app.js') }}"></script>
+        <script src="{{ @asset('/assets/QiNiu/js/lodash.min.js') }}"></script>
+        <script src="{{ @asset('/assets/QiNiu/js/app.js') }}"></script>
         @stack('script')
     </body>
 </html>

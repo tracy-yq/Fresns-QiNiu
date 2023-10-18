@@ -81,7 +81,7 @@ class AntiLinkFileInfo extends DTO
                 $fileInfo[$key] = $this->getAntiLinkUrl($fileInfo[$key], $deadline);
             }
 
-            $cacheTime = CacheHelper::fresnsCacheTimeByFileType($this->getType());
+            $cacheTime = CacheHelper::fresnsCacheTimeByFileType($this->getType(), null, 2);
 
             CacheHelper::put($fileInfo, $cacheKey, $cacheTags, null, $cacheTime);
         }

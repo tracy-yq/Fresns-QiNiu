@@ -214,8 +214,8 @@ function uploadFile(file) {
     var extension = getFileExtension(file.name);
 
     // 不支持当前文件的后缀
-    if (setting_extensions && setting_extensions.includes(extension) === false) {
-        window.tips('文件类型不正确，上传失败');
+    if (setting_extensions && setting_extensions.includes(extension.toLocaleLowerCase()) === false) {
+        window.tips('文件类型不正确，上传失败, 文件后缀为:' + extension);
         progressExit && progressExit();
         return;
     }
